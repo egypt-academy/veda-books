@@ -13,6 +13,11 @@ document.querySelectorAll(".wa-link").forEach(link => {
   link.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
   link.target = "_blank";
   link.rel = "noopener";
+  link.addEventListener("click", () => {
+    if (typeof fbq === "function") {
+      fbq("track", "Contact", { content_name: plan });
+    }
+  });
 });
 
 const observer = new IntersectionObserver(entries => {
